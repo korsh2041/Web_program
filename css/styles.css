@@ -226,7 +226,7 @@ p {
 
 .hero_section .hero_section__right img {
   width: 100%;
-  max-width: 500px;
+  max-width: 667px;
 }
 
 /* Секция брендов */
@@ -540,21 +540,29 @@ p {
 }
 
 .future-access-button {
-  background: #FF4820;
-  color: #fff;
-  border: none;
+  background: #031B34;
+  color: rgba(255, 255, 255, 0.7);
+  border: 2px solid #fff;
   padding: 1.5rem 3rem;
   font-size: 18px;
-  font-weight: bold;
-  border-radius: 5px;
+  font-weight: 500; /* ← Меняем bold на 500 (Medium) */
+  font-style: normal; /* ← Добавляем явное указание стиля */
+  
   cursor: pointer;
   transition: all 0.3s ease;
   font-family: "Manrope", sans-serif;
+  line-height: 1; /* ← Добавляем line-height: 100% */
+  letter-spacing: 0; /* ← Добавляем letter-spacing: 0% */
+  text-align: center; /* ← Добавляем выравнивание по центру */
+  display: inline-block; /* Для правильного выравнивания текста */
+  
 }
 
 .future-access-button:hover {
-  background: #FF6B47;
+  background: #fff;
+  color: #031B34;
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
 }
 
 /* Адаптивность для Future Access Section */
@@ -577,6 +585,7 @@ p {
   .future-access-button {
     padding: 1rem 2rem;
     font-size: 14px;
+   
   }
   
   .future-access-section {
@@ -604,23 +613,37 @@ p {
 .blog_container {
   display: flex;
   gap: 2rem;
+  align-items: stretch;
 }
 
 .blog_main {
-  flex: 1;
+  flex: 3;
+  display: flex;
+  width: 420px;
 }
 
 .blog_secondary {
-  flex: 1;
+  flex: 5;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
+  height: 690px
 }
 
+/* ИСПРАВЛЯЕМ ЭТОТ БЛОК - добавляем flex для ВСЕХ карточек */
 .blog_card {
   background: #042C54;
   overflow: hidden;
   transition: transform 0.3s ease;
+  display: flex; /* ← Добавляем для всех карточек */
+  flex-direction: column; /* ← Добавляем для всех карточек */
+  clip-path: polygon(
+    20px 0%,       /* начало среза */
+    100% 0%,       /* правый верхний */
+    100% 100%,     /* правый нижний */
+    0% 100%,       /* левый нижний */
+    0% 20px      /* завершение среза */
+  );
 }
 
 .blog_card:hover {
@@ -634,39 +657,70 @@ p {
 }
 
 .blog_card.main_card img {
-  height: 420px;
+  height: 280px;
 }
+
 
 .blog_content {
   padding: 1.5rem;
+  flex-grow: 1; /* ← Добавляем для всех */
+  display: flex; /* ← Добавляем для всех */
+  flex-direction: column; /* ← Добавляем для всех */
 }
 
 .blog_date {
-  color: #81AFDD;
-  font-size: 12px;
+  color: #a8a6a6;
+  font-size: 10px;
   margin-bottom: 0.5rem;
 }
 
 .blog_title {
-  font-size: 18px;
+  font-size: 26px;
+  color: #fff;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+  font-family: "ManropeBold", sans-serif;
+}
+.blog_title_secondary {
+  font-size: 20px;
   color: #fff;
   margin-bottom: 1rem;
   line-height: 1.4;
   font-family: "ManropeBold", sans-serif;
 }
 
+/* ДОБАВЛЯЕМ ДЛЯ ВСЕХ КАРТОЧЕК, а не только для main_card */
 .blog_read_more {
-  color: #FF8A71;
-  font-size: 14px;
+  color: #ffffff;
+  font-size: 10px;
   font-weight: 500;
   border-bottom: 1px solid transparent;
   transition: border-color 0.3s;
+  margin-top: auto; /* ← Вот это ключевое для всех! */
+  display: inline-block; /* ← Добавляем это */
+  width: max-content; /* ← И это */
 }
 
 .blog_read_more:hover {
   border-bottom-color: #FF8A71;
 }
 
+.main_card {
+  flex-grow: 1;
+}
+
+/* УБИРАЕМ эти стили, так как теперь они применены ко всем карточкам */
+/*
+.main_card .blog_content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.main_card .blog_read_more {
+  margin-top: auto;
+}
+*/
 /* Адаптивность для блога */
 @media screen and (max-width: 1024px) {
   .blog_container {
@@ -729,7 +783,7 @@ p {
 }
 
 .footer_title {
-  font-size: 28px;
+  font-size: 50px;
   margin-bottom: 1rem;
   background: linear-gradient(90deg, #AE67FA 0%, #F49867 100%);
   background-clip: text;
@@ -739,11 +793,16 @@ p {
 
 .footer_address {
   color: #81afdd;
+  width: 200px;
+  font-weight: 300;
+  opacity: 0.7;
 }
 
 .footer_addresss {
   padding: 2rem 0 4rem;
   color: #81afdd;
+  font-weight: 200;
+  opacity: 0.7;
 }
 
 .footer_links {
@@ -755,14 +814,18 @@ p {
 
 .link_group {
   display: flex;
+  padding-top: 1rem;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .link_group a {
   color: #fff;
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: 200;
   transition: color 0.3s;
+  opacity: 0.7;
+
 }
 
 .link_group a:hover {
@@ -772,13 +835,45 @@ p {
 .link_name {
   height: 100pt;
 }
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
 
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex-grow: 1;
+}
+
+.footer {
+  background: #031B34;
+  margin-top: auto;
+  padding: 2rem 0 0;
+}
 .footer_bottom {
   text-align: center;
-  padding-top: 2rem;
+  padding: 0.5rem 0; /* Минимальные отступы */
+  margin: 0;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  color: #81afdd;
-  font-size: 14px;
+  background-color:#040C18;
+}
+
+.footer_bottom p {
+  color: #ffffff;
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+.link__name {
+  width: 118px; /* Нужная ширина */
+  height: auto; /* Сохраняет пропорции */
 }
 
 /* Медиа запросы для адаптива */
@@ -873,4 +968,6 @@ p {
     padding: 0.8rem 2rem;
     font-size: 16px;
   }
+
+
 }
